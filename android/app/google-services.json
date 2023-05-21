@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "968800081915",
+    "project_id": "car-render-45dad",
+    "storage_bucket": "car-render-45dad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968800081915:android:89795170a64c87c4929d5e",
+        "android_client_info": {
+          "package_name": "com.example.lab04"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968800081915-qa44gjv9tufdtclgpn5h9vu51gph8ipo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2xzJM9Xt1wEV-dzBiqkMZFJP6I59aNxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968800081915-qa44gjv9tufdtclgpn5h9vu51gph8ipo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
