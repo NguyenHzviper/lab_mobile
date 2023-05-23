@@ -15,15 +15,16 @@ class CustomForm extends StatefulWidget {
 
 class _CustomFormState extends State<CustomForm> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _repasswordController = TextEditingController();
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController repasswordController = TextEditingController();
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _repasswordController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    repasswordController.dispose();
     super.dispose();
   }
 
@@ -45,7 +46,10 @@ class _CustomFormState extends State<CustomForm> {
               }
               return null;
             },
-            controller: _emailController,
+            controller: emailController,
+            onChanged: (value) {
+              setState(() {});
+            },
           ),
           TextFormField(
             obscureText: true,
@@ -59,7 +63,10 @@ class _CustomFormState extends State<CustomForm> {
               }
               return null;
             },
-            controller: _passwordController,
+            controller: passwordController,
+            onChanged: (value) {
+              setState(() {});
+            },
           ),
           if (widget.typeOfForm == 'signup')
             TextFormField(
@@ -72,19 +79,22 @@ class _CustomFormState extends State<CustomForm> {
                 if (value!.isEmpty) {
                   return 'Please enter your password';
                 }
-                if (value != _passwordController.text) {
+                if (value != passwordController.text) {
                   return 'Your password does not match';
                 }
                 return null;
               },
-              controller: _repasswordController,
+              controller: repasswordController,
+              onChanged: (value) {
+                setState(() {});
+              },
             ),
           if (widget.typeOfForm == 'signup')
             SignUpButton(
-                _emailController.text, _passwordController.text, _formKey),
+                emailController.text, passwordController.text, _formKey),
           if (widget.typeOfForm != 'signup')
             LoginButton(
-                _emailController.text, _passwordController.text, _formKey),
+                emailController.text, passwordController.text, _formKey),
         ],
       ),
     );

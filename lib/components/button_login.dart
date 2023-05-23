@@ -15,38 +15,36 @@ class LoginButton extends StatefulWidget {
 
 class _LoginButtonState extends State<LoginButton> {
   final Auth _auth = Auth();
-  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldMessenger(
-      key: _scaffoldMessengerKey,
-      child: OutlinedButton(
-        onPressed: () async {
-          if (widget._formKey.currentState!.validate()) {
-            try {
-              await _auth.login(widget.email.trim(), widget.password.trim());
+    return OutlinedButton(
+      onPressed: () async {
+        if (widget._formKey.currentState!.validate()) {
+          try {
+            print(widget.email.trim());
+            print(widget.password.trim());
 
-              _scaffoldMessengerKey.currentState?.showSnackBar(
-                const SnackBar(content: Text('Login success')),
+            await _auth.login(widget.email.trim(), widget.password.trim());
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Login success')),
+            );
+          } catch (e) {
+            if (e is FirebaseException) {
+              String errorMessage = e.message.toString();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(errorMessage)),
               );
-            } catch (e) {
-              if (e is FirebaseException) {
-                String errorMessage = e.message.toString();
-                _scaffoldMessengerKey.currentState?.showSnackBar(
-                  SnackBar(content: Text(errorMessage)),
-                );
-              } else {
-                _scaffoldMessengerKey.currentState?.showSnackBar(
-                  const SnackBar(content: Text("I don't know :)")),
-                );
-              }
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("I don't know :)")),
+              );
             }
           }
-        },
-        child: const Text("Login"),
-      ),
+        }
+      },
+      child: const Text("Login"),
     );
   }
 }

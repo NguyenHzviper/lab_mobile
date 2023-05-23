@@ -14,8 +14,7 @@ class SignUpButton extends StatefulWidget {
 
 class _SignUpButtonState extends State<SignUpButton> {
   final Auth _auth = Auth();
-  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
+
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
@@ -24,17 +23,17 @@ class _SignUpButtonState extends State<SignUpButton> {
             try {
               await _auth.register(widget.email.trim(), widget.password.trim());
 
-              _scaffoldMessengerKey.currentState?.showSnackBar(
+              ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Register success')));
             } catch (e) {
               if (e is FirebaseException) {
                 String errorMessage = e.message.toString();
 
-                _scaffoldMessengerKey.currentState?.showSnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(errorMessage)),
                 );
               } else {
-                _scaffoldMessengerKey.currentState?.showSnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text("I don't know :)")),
                 );
               }
